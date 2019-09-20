@@ -100,11 +100,11 @@ var createDataPhotos = function () {
 };
 
 var dataPhotos = createDataPhotos();
-var pictureTamplate = document.querySelector('#picture').content.querySelector('.picture');
+var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var picturesElement = document.querySelector('.pictures');
 
 var renderPicture = function (picture) {
-  var pictureElement = pictureTamplate.cloneNode(true);
+  var pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = picture.url;
   pictureElement.querySelector('.picture__likes').textContent = '' + picture.likes;
   pictureElement.querySelector('.picture__comments').textContent = '' + picture.comments.length;
