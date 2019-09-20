@@ -111,7 +111,7 @@ var renderPicture = function (picture) {
   return pictureElement;
 };
 
-var appendPinsFragment = function (data) {
+var appendPhotosFragment = function (data) {
   var fragment = document.createDocumentFragment();
   for (var item = 0; item < data.length; item++) {
     fragment.appendChild(renderPicture(data[item]));
@@ -119,4 +119,4 @@ var appendPinsFragment = function (data) {
   picturesElement.appendChild(fragment);
 };
 
-appendPinsFragment(dataPhotos);
+appendPhotosFragment(dataPhotos);
