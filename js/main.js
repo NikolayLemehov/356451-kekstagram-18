@@ -115,18 +115,18 @@ var picturesElement = document.querySelector('.pictures');
 var bigPictureElement = document.querySelector('.big-picture');
 var socialCommentsElement = document.querySelector('.social__comments');
 
-var renderPicture = function (picture) {
+var renderPicture = function (data) {
   var pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = picture.url;
-  pictureElement.querySelector('.picture__likes').textContent = '' + picture.likes;
-  pictureElement.querySelector('.picture__comments').textContent = '' + picture.comments.length;
+  pictureElement.querySelector('.picture__img').src = data.url;
+  pictureElement.querySelector('.picture__likes').textContent = '' + data.likes;
+  pictureElement.querySelector('.picture__comments').textContent = '' + data.comments.length;
   return pictureElement;
 };
 
-var appendPhotosFragment = function (data) {
+var appendPhotosFragment = function (dataArray) {
   var fragment = document.createDocumentFragment();
-  for (var item = 0; item < data.length; item++) {
-    fragment.appendChild(renderPicture(data[item]));
+  for (var item = 0; item < dataArray.length; item++) {
+    fragment.appendChild(renderPicture(dataArray[item]));
   }
   picturesElement.appendChild(fragment);
 };
@@ -138,18 +138,18 @@ var fillBigPicture = function (element, dataPhoto) {
   element.querySelector('.social__caption').textContent = dataPhoto.description;
 };
 
-var renderSocialComments = function (dataComment) {
+var renderSocialComments = function (data) {
   var socialCommentElement = bigPictureElement.querySelector('.social__comment').cloneNode(true);
-  socialCommentElement.querySelector('.social__picture').src = dataComment.avatar;
-  socialCommentElement.querySelector('.social__picture').alt = dataComment.name;
-  socialCommentElement.querySelector('.social__text').textContent = dataComment.message;
+  socialCommentElement.querySelector('.social__picture').src = data.avatar;
+  socialCommentElement.querySelector('.social__picture').alt = data.name;
+  socialCommentElement.querySelector('.social__text').textContent = data.message;
   return socialCommentElement;
 };
 
-var appendSocialComments = function (comments) {
+var appendSocialComments = function (dataArray) {
   var fragment = document.createDocumentFragment();
-  for (var item = 0; item < comments.length; item++) {
-    fragment.appendChild(renderSocialComments(comments[item]));
+  for (var item = 0; item < dataArray.length; item++) {
+    fragment.appendChild(renderSocialComments(dataArray[item]));
   }
   bigPictureElement.querySelector('.social__comment').remove();
   bigPictureElement.querySelector('.social__comment').remove();
