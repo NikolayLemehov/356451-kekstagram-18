@@ -154,8 +154,9 @@ var appendSocialComments = function (dataArray) {
   for (var item = 0; item < dataArray.length; item++) {
     fragment.appendChild(renderSocialComments(dataArray[item]));
   }
-  bigPictureElement.querySelector('.social__comment').remove();
-  bigPictureElement.querySelector('.social__comment').remove();
+  while (socialCommentsElement.firstChild) {
+    socialCommentsElement.removeChild(socialCommentsElement.firstChild);
+  }
   socialCommentsElement.appendChild(fragment);
 };
 
