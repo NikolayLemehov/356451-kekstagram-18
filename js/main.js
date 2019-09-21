@@ -76,7 +76,10 @@ var findRandomSliceArray = function (array) {
 };
 
 var findSliceShuffleArray = function (array, sliceNumber) {
-  return (sliceNumber < array.length) ? shuffle(array).slice(array.length - findRandomInteger(1, sliceNumber)) : shuffle(array).slice(findRandomInteger(0, array.length - 1));
+  if (sliceNumber < array.length) {
+    return shuffle(array).slice(array.length - findRandomInteger(1, sliceNumber));
+  }
+  return shuffle(array).slice(findRandomInteger(0, array.length - 1));
 };
 
 var createDataComments = function () {
