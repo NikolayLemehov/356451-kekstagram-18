@@ -35,6 +35,7 @@ var NAMES = [
   'Полина'
 ];
 var FIRST_INDEX = 0;
+var COEFFICIENT_MAX = 1;
 
 var findRandomInteger = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
@@ -66,6 +67,10 @@ var concatenateItemArray = function (array) {
     }
   }
   return string;
+};
+
+var convertPixelToInteger = function (string) {
+  return Number(string.slice(0, -2));
 };
 
 var findRandomItemArray = function (array) {
@@ -188,6 +193,62 @@ var uploadCancelBtn = document.querySelector('#upload-cancel');
 uploadCancelBtn.addEventListener('click', function () {
   hideUpLoadForm();
 });
+
+// описание слайдера
+var findCheckedElement = function (collection) { // util
+  for (var i = 0; i < collection.length; i++) {
+    if (collection[i].checked) {
+      return collection[i];
+    }
+  }
+  return null;
+};
+var convertProportion = function (coefficient, from, to) { // util
+  return (to - from) * coefficient;
+};
+var mapEffect = {// data
+  'none': function () {
+    return '';
+  },
+  'chrome': function (coefficient) {
+    return 'grayscale(' + coefficient + ')';
+  },
+  'sepia': function (coefficient) {
+    return 'sepia(' + coefficient + ')';
+  },
+  'marvin': function (coefficient) {
+    return 'invert(' + (coefficient * 100) + '%)';
+  },
+  'phobos': function (coefficient) {
+    return 'blur(' + convertProportion(coefficient, 0, 3) + 'px)';
+  },
+  'heat': function (coefficient) {
+    return 'brightness(' + convertProportion(coefficient, 0, 3);
+  },
+};
+var effectsList = document.querySelector('.effects__list');
+var effectsRadios = effectsList.querySelectorAll('.effects__item .effects__radio');
+
+var imgUploadPreviewElement = document.querySelector('.img-upload__preview');
+
+var effectLevelLineElement = document.querySelector('.effect-level__line');
+var effectLevelPinElement = effectLevelLineElement.querySelector('.effect-level__pin');
+effectLevelPinElement.addEventListener('mouseup', function () {
+  var coefficient = convertPixelToInteger(getComputedStyle(effectLevelPinElement).left) /
+    convertPixelToInteger(getComputedStyle(effectLevelLineElement).width);
+  var checkedElement = findCheckedElement(effectsRadios);
+  imgUploadPreviewElement.style.filter = mapEffect[checkedElement.getAttribute('value')](coefficient);
+});
+
+var addChangeEffectsRadioHandler = function (element) {
+  element.addEventListener('change', function (evt) {
+    imgUploadPreviewElement.style.filter = mapEffect[evt.target.getAttribute('value')](COEFFICIENT_MAX);
+  });
+};
+
+for (var i = 0; i < effectsRadios.length; i++) {
+  addChangeEffectsRadioHandler(effectsRadios[i]);
+}
 
 appendPhotosFragment(dataPhotos);
 // bigPictureElement.classList.remove('hidden');
