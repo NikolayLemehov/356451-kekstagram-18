@@ -161,6 +161,33 @@ var appendSocialComments = function (dataArray) {
   }
   socialCommentsElement.appendChild(fragment);
 };
+// форма загрузки фото
+var hideUpLoadForm = function () {
+  imgUploadOverlayElement.classList.add('hidden');
+  uploadFileInput.value = null;
+  document.removeEventListener('keydown', pressEscCloseFormBtnHandler);
+};
+var showUpLoadForm = function () {
+  imgUploadOverlayElement.classList.remove('hidden');
+  document.addEventListener('keydown', pressEscCloseFormBtnHandler);
+};
+
+var pressEscCloseFormBtnHandler = function (evt) {
+  if (evt.keyCode === ESC_KEY_CODE) {
+    hideUpLoadForm();
+  }
+};
+
+var uploadFileInput = document.querySelector('#upload-file');
+var imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
+uploadFileInput.addEventListener('change', function () {
+  showUpLoadForm();
+});
+
+var uploadCancelBtn = document.querySelector('#upload-cancel');
+uploadCancelBtn.addEventListener('click', function () {
+  hideUpLoadForm();
+});
 
 appendPhotosFragment(dataPhotos);
 // bigPictureElement.classList.remove('hidden');
