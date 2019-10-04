@@ -1,5 +1,6 @@
 'use strict';
 
+var ESC_KEY_CODE = 27;
 var PHOTO_QUANTITY = 25;
 var AVATAR_QUANTITY = 6;
 var SRC_PHOTO_ITEMS = ['photos/', '.jpg'];
@@ -38,6 +39,7 @@ var FIRST_INDEX = 0;
 var findRandomInteger = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
+
 var shuffle = function (array) {
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -112,6 +114,7 @@ var createDataPhotos = function () {
 };
 
 var dataPhotos = createDataPhotos();
+
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var picturesElement = document.querySelector('.pictures');
 var bigPictureElement = document.querySelector('.big-picture');
@@ -160,7 +163,7 @@ var appendSocialComments = function (dataArray) {
 };
 
 appendPhotosFragment(dataPhotos);
-bigPictureElement.classList.remove('hidden');
+// bigPictureElement.classList.remove('hidden');
 fillBigPicture(bigPictureElement, dataPhotos[FIRST_INDEX]);
 appendSocialComments(dataPhotos[FIRST_INDEX].comments);
 bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
