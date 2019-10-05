@@ -204,7 +204,7 @@ var findCheckedElement = function (collection) { // util
   return null;
 };
 var convertProportion = function (coefficient, from, to) { // util
-  return (to - from) * coefficient;
+  return (to - from) * coefficient + from;
 };
 var mapEffect = {// data
   'none': function () {
@@ -223,7 +223,7 @@ var mapEffect = {// data
     return 'blur(' + convertProportion(coefficient, 0, 3) + 'px)';
   },
   'heat': function (coefficient) {
-    return 'brightness(' + convertProportion(coefficient, 0, 3);
+    return 'brightness(' + convertProportion(coefficient, 1, 3);
   },
 };
 var effectsList = document.querySelector('.effects__list');
