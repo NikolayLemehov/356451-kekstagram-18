@@ -256,6 +256,10 @@ var TAG = {
   LENGTH: 20,
 };
 var mistakeHashtag = {
+  start: {
+    message: 'Хештег должен начинаться с символа "#".',
+    boolean: false,
+  },
   single: {
     message: 'Хештег не может состоять из одного символа "#".',
     boolean: false,
@@ -286,6 +290,10 @@ var validateHashtags = function () {
   }
   array.forEach(function (it, i) {
     switch (true) {
+      case (it[0] !== '#' && !mistakeHashtag.start.boolean):
+        errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.start.message;
+        mistakeHashtag.start.boolean = true;
+        break;
       case (it === '#' && !mistakeHashtag.single.boolean):
         errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.single.message;
         mistakeHashtag.single.boolean = true;
