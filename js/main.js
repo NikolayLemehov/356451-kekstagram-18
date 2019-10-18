@@ -246,9 +246,71 @@ var addChangeEffectsRadioHandler = function (element) {
   });
 };
 
-for (var i = 0; i < effectsRadios.length; i++) {
-  addChangeEffectsRadioHandler(effectsRadios[i]);
-}
+effectsRadios.forEach(function (it) {
+  addChangeEffectsRadioHandler(it);
+});
+
+// валидация тегов
+var TAG = {
+  LIMIT: 5,
+  LENGTH: 20,
+};
+var mistakeHashtag = {
+  single: {
+    message: 'Хештег не может состоять из одного символа "#".',
+    boolean: false,
+  },
+  length: {
+    message: 'Хештег не может быть длиннее ' + TAG.LENGTH + ' символов всключая "#".',
+    boolean: false,
+  },
+  repeat: {
+    message: 'Хештег не должен повторятся с учётом того, что к регистру букв он не чувствителен.',
+    boolean: false,
+  },
+  limit: {
+    message: 'Хештегов не может быть больше ' + TAG.LIMIT + 'шт.',
+    boolean: false,
+  },
+};
+var textHashtagsInput = document.querySelector('.text__hashtags');
+var validateHashtags = function () {
+  var counter = 0;
+  var errorMessage = '';
+  var array = textHashtagsInput.value.toLowerCase().split(' ');
+  array = array.filter(function (it) {
+    return it !== '';
+  });
+  if (array.length > TAG.LIMIT) {
+    errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.limit.message;
+  }
+  array.forEach(function (it, i) {
+    switch (true) {
+      case (it === '#' && !mistakeHashtag.single.boolean):
+        errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.single.message;
+        mistakeHashtag.single.boolean = true;
+        break;
+      case (it.length > 20 && !mistakeHashtag.length.boolean):
+        errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.length.message;
+        mistakeHashtag.length.boolean = true;
+        break;
+      case (!mistakeHashtag.repeat.boolean && !!(array.slice(i + 1)).find(function (item) {
+        return item === it;
+      })):
+        errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.repeat.message;
+        mistakeHashtag.repeat.boolean = true;
+        break;
+      default:
+        return;
+    }
+  });
+  textHashtagsInput.setCustomValidity(errorMessage);
+};
+validateHashtags();
+
+textHashtagsInput.addEventListener('change', function () {
+  validateHashtags();
+});
 
 appendPhotosFragment(dataPhotos);
 // bigPictureElement.classList.remove('hidden');
