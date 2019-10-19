@@ -18,16 +18,18 @@
     });
     picturesElement.appendChild(fragment);
   };
-  picturesElement.addEventListener('click', function (evt) {
-    var src = evt.target.getAttribute('src');
-    if (src) {
-      window.data.currentPhoto = window.data.photos.find(function (it) {
-        return it.url === src;
-      });
-      window.bigPicture.activate(window.data.currentPhoto);
-    }
-  });
+  picturesElement.addEventListener('click', window.picture.onPicturesClick);
   window.picture = {
     addPhoto: appendPhotosFragment,
+    picturesElement: picturesElement,
+    onPicturesClick: function (evt) {
+      var src = evt.target.getAttribute('src');
+      if (src) {
+        window.data.currentPhoto = window.data.photos.find(function (it) {
+          return it.url === src;
+        });
+        window.bigPicture.activate(window.data.currentPhoto);
+      }
+    },
   };
 })();
