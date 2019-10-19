@@ -2,18 +2,15 @@
 
 (function () {
   var COEFFICIENT_MAX = 1;
-  var findCheckedElement = function (collection) { // util
-    for (var i = 0; i < collection.length; i++) {
-      if (collection[i].checked) {
-        return collection[i];
-      }
-    }
-    return null;
+  var findCheckedElement = function (collection) {
+    return Array.from(collection).find(function (it) {
+      return it.checked === true;
+    });
   };
-  var convertProportion = function (coefficient, from, to) { // util
+  var convertProportion = function (coefficient, from, to) {
     return (to - from) * coefficient + from;
   };
-  var mapEffect = {// data
+  var mapEffect = {
     'none': function () {
       return '';
     },
