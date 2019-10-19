@@ -2,6 +2,7 @@
 
 (function () {
   window.util = {
+    ESC_KEY_CODE: 27,
     findRandomInteger: function (min, max) {
       return Math.floor(min + Math.random() * (max + 1 - min));
     },
