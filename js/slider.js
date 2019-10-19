@@ -10,7 +10,7 @@
   var convertProportion = function (coefficient, from, to) {
     return (to - from) * coefficient + from;
   };
-  var mapEffect = {
+  var effectMap = {
     'none': function () {
       return '';
     },
@@ -30,23 +30,46 @@
       return 'brightness(' + convertProportion(coefficient, 1, 3);
     },
   };
-  var effectsList = document.querySelector('.effects__list');
-  var effectsRadios = effectsList.querySelectorAll('.effects__item .effects__radio');
+  // var effectsList = document.querySelector('.effects__list');
+  var effectsRadios = document.querySelectorAll('.effects__list .effects__item .effects__radio');
 
   var imgUploadPreviewElement = document.querySelector('.img-upload__preview');
-
   var effectLevelLineElement = document.querySelector('.effect-level__line');
   var effectLevelPinElement = effectLevelLineElement.querySelector('.effect-level__pin');
-  effectLevelPinElement.addEventListener('mouseup', function () {
-    var coefficient = window.util.convertPixelToInteger(getComputedStyle(effectLevelPinElement).left) /
-      window.util.convertPixelToInteger(getComputedStyle(effectLevelLineElement).width);
-    var checkedElement = findCheckedElement(effectsRadios);
-    imgUploadPreviewElement.style.filter = mapEffect[checkedElement.getAttribute('value')](coefficient);
+
+  var getValuePinAndDepth = function (value) {
+    effectLevelPinElement.style.left = value + 'px';
+    effectLevelDepthElement.style.width = value + 'px';
+  };
+
+  effectLevelPinElement.addEventListener('mousedown', function (evt) {
+    var startCoordsX = evt.clientX;
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      var shift = moveEvt.clientX - startCoordsX;
+      var left = effectLevelPinElement.offsetLeft + shift;
+      if (Math.round(left) >= 0 && Math.round(left) <= effectLevelLineElement.offsetWidth) {
+        getValuePinAndDepth(left);
+        startCoordsX = moveEvt.clientX;
+      }
+      var coefficient = window.util.convertPixelToInteger(getComputedStyle(effectLevelPinElement).left) /
+        window.util.convertPixelToInteger(getComputedStyle(effectLevelLineElement).width);
+      var checkedElement = findCheckedElement(effectsRadios);
+      imgUploadPreviewElement.style.filter = effectMap[checkedElement.getAttribute('value')](coefficient);
+    };
+    var onMouseUp = function () {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 
+  var effectLevelDepthElement = effectLevelLineElement.querySelector('.effect-level__depth');
   var addChangeEffectsRadioHandler = function (element) {
     element.addEventListener('change', function (evt) {
-      imgUploadPreviewElement.style.filter = mapEffect[evt.target.getAttribute('value')](COEFFICIENT_MAX);
+      imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
+      getValuePinAndDepth(effectLevelLineElement.offsetWidth);
     });
   };
 
