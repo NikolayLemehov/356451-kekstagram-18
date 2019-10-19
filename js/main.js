@@ -161,5 +161,4 @@
   });
 
   window.backend.load(window.success.onLoad, window.error.onError);
-  // imgUploadOverlayElement.classList.remove('hidden');// временно
 })();
