@@ -24,17 +24,14 @@
     bigPictureElement.classList.add('hidden');
     document.removeEventListener('keydown', onDocumentBigPictureKeyDownEsc);
     window.comment.showLoaderBtn();
-    window.bigPicture.active = false;
   };
 
   window.bigPicture = {
-    active: false,
     activate: function (data) {
       bigPictureElement.classList.remove('hidden');
       fillBigPicture(bigPictureElement, data);
       window.comment.add(data.comments);
       document.addEventListener('keydown', onDocumentBigPictureKeyDownEsc);
-      this.active = true;
     },
   };
 })();
