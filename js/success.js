@@ -38,6 +38,7 @@
     onLoad: function (data) {
       window.data.photos = data;
       window.picture.addPhoto(window.data.photos);
+      window.filter.show();
     },
     onSave: function () {
       showSuccess();
