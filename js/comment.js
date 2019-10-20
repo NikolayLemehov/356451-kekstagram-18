@@ -15,9 +15,7 @@
     for (var item = 0; item < dataArray.length; item++) {
       fragment.appendChild(renderSocialComments(dataArray[item]));
     }
-    while (socialCommentsElement.firstChild) {
-      socialCommentsElement.removeChild(socialCommentsElement.firstChild);
-    }
+    socialCommentsElement.innerHTML = '';
     socialCommentsElement.appendChild(fragment);
   };
 
