@@ -69,6 +69,21 @@
     validateHashtags();
   });
 
+  var toColorInvalid = function (element) {
+    element.style.backgroundColor = 'red';
+  };
+  var toColorValid = function (element) {
+    element.style.backgroundColor = 'white';
+  };
+  textHashtagsInput.addEventListener('invalid', function () {
+    toColorInvalid(textHashtagsInput);
+  });
+  textHashtagsInput.addEventListener('change', function () {
+    if (textHashtagsInput.checkValidity()) {
+      toColorValid(textHashtagsInput);
+    }
+  });
+
   window.hashtag = {
     textInput: textHashtagsInput,
   };
