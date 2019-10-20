@@ -7,8 +7,7 @@
   var socialCommentsElement = document.querySelector('.social__comments');
   var displayStyleComment = getComputedStyle(socialCommentsElement.querySelector('.social__comment')).display;
 
-  // var socialCommentCountElement = document.querySelector('.social__comment-count');
-  // var commentsCountElement = socialCommentCountElement.querySelector('.comments-count');
+  var commentsShowElement = document.querySelector('.social__comment-count .comments-show');
   var commentsLoaderBtn = document.querySelector('.comments-loader');
   var displayStyleLoaderBtn = getComputedStyle(commentsLoaderBtn).display;
 
@@ -31,11 +30,13 @@
         collection[i].style.display = displayStyleComment;
       }
       showedCommentsNumber += SHOWED_COMMENTS_STEP;
+      commentsShowElement.textContent = showedCommentsNumber;
     } else {
       for (var j = showedCommentsNumber; j < collection.length; j++) {
         collection[j].style.display = displayStyleComment;
       }
       showedCommentsNumber = 0;
+      commentsShowElement.textContent = collection.length;
       commentsLoaderBtn.style.display = 'none';
     }
   };
