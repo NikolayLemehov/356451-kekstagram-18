@@ -41,6 +41,10 @@
     effectLevelPinElement.style.left = value + 'px';
     effectLevelDepthElement.style.width = value + 'px';
   };
+  var getMaxValuePinAndDepth = function () {
+    effectLevelPinElement.style.left = '100%';
+    effectLevelDepthElement.style.width = '100%';
+  };
 
   effectLevelPinElement.addEventListener('mousedown', function (evt) {
     var startCoordsX = evt.clientX;
@@ -66,14 +70,32 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var addChangeEffectsRadioHandler = function (element) {
+  var effectLevelElement = document.querySelector('.effect-level');
+  var getOriginal = function () {
+    imgUploadPreviewElement.style.filter = '';
+    effectLevelElement.style.display = 'none';
+    effectLevelElement.setAttribute('disabled', 'disabled');
+    effectLevelValueInput.setAttribute('value', '0');
+  };
+  getOriginal();
+  var getEffect = function (evt) {
+    imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
+    getMaxValuePinAndDepth();
+    effectLevelElement.removeAttribute('disabled');
+    effectLevelValueInput.setAttribute('value', '100');
+    effectLevelElement.style.display = 'block';
+  };
+  var addOnEffectsRadioChange = function (element) {
     element.addEventListener('change', function (evt) {
-      imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
-      getValuePinAndDepth(effectLevelLineElement.offsetWidth);
+      if (evt.target.getAttribute('value') === 'none') {
+        getOriginal();
+      } else {
+        getEffect(evt);
+      }
     });
   };
 
   effectsRadios.forEach(function (it) {
-    addChangeEffectsRadioHandler(it);
+    addOnEffectsRadioChange(it);
   });
 })();
