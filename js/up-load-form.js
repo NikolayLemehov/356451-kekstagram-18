@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var formElement = document.querySelector('#upload-select-image');
+  var uploadFileInput = document.querySelector('#upload-file');
+  var imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
+
   var hideUpLoadForm = function () {
     imgUploadOverlayElement.classList.add('hidden');
     uploadFileInput.value = null;
@@ -21,8 +25,6 @@
     }
   };
 
-  var uploadFileInput = document.querySelector('#upload-file');
-  var imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
   uploadFileInput.addEventListener('change', function () {
     showUpLoadForm();
   });
@@ -31,4 +33,17 @@
   uploadCancelBtn.addEventListener('click', function () {
     hideUpLoadForm();
   });
+
+  var formSubmitBtn = document.querySelector('.img-upload__submit');
+  formSubmitBtn.addEventListener('click', function (evt) {
+    if (formElement.checkValidity()) {
+      evt.preventDefault();
+      window.backend.save(new FormData(formElement), window.success.onSave, window.error.onError);
+    }
+  });
+
+  window.upLoadForm = {
+    element: formElement,
+    hide: hideUpLoadForm,
+  };
 })();

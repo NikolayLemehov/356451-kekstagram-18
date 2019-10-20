@@ -71,13 +71,13 @@
   });
 
   var effectLevelElement = document.querySelector('.effect-level');
-  var getOriginal = function () {
+  var getOrigin = function () {
     imgUploadPreviewElement.style.filter = '';
     effectLevelElement.style.display = 'none';
     effectLevelElement.setAttribute('disabled', 'disabled');
     effectLevelValueInput.setAttribute('value', '0');
   };
-  getOriginal();
+  getOrigin();
   var getEffect = function (evt) {
     imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
     getMaxValuePinAndDepth();
@@ -88,7 +88,7 @@
   var addOnEffectsRadioChange = function (element) {
     element.addEventListener('change', function (evt) {
       if (evt.target.getAttribute('value') === 'none') {
-        getOriginal();
+        getOrigin();
       } else {
         getEffect(evt);
       }
@@ -98,4 +98,8 @@
   effectsRadios.forEach(function (it) {
     addOnEffectsRadioChange(it);
   });
+
+  window.slider = {
+    getOrigin: getOrigin,
+  };
 })();

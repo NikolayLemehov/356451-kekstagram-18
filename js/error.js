@@ -1,13 +1,12 @@
 'use strict';
 
 (function () {
-  var mainElement = document.querySelector('main');
   var errorTemplate = document.querySelector('#error').content.querySelector('.error');
   var addError = function () {
     var element = errorTemplate.cloneNode(true);
     element.style.display = 'none';
-    mainElement.appendChild(element);
-    return mainElement.querySelector('.error');
+    window.element.main.appendChild(element);
+    return window.element.main.querySelector('.error');
   };
   var errorElement = addError();
 
