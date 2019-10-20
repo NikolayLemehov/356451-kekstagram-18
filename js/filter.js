@@ -18,15 +18,15 @@
 
   filterPopularBtn.addEventListener('click', function () {
     switchFilter(filterPopularBtn);
-    updatePicture();
+    debounceUpdatePicture();
   });
   filterRandomBtn.addEventListener('click', function () {
     switchFilter(filterRandomBtn);
-    updatePicture();
+    debounceUpdatePicture();
   });
   filterDiscussedBtn.addEventListener('click', function () {
     switchFilter(filterDiscussedBtn);
-    updatePicture();
+    debounceUpdatePicture();
   });
 
   var sortByPopular = function (photos) {
@@ -51,7 +51,7 @@
     });
   };
 
-  var updatePicture = window.debounce(function () {
+  var updatePicture = function () {
     var filtredPicture = window.data.photos.slice();
     switch (activeFilter) {
       case (filterPopularBtn.getAttribute('id')):
@@ -65,7 +65,8 @@
         break;
     }
     window.picture.render(filtredPicture);
-  });
+  };
+  var debounceUpdatePicture = window.debounce(updatePicture);
 
   window.filter = {
     show: function () {

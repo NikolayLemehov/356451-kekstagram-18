@@ -23,6 +23,7 @@
   var deactivateBigPicture = function () {
     bigPictureElement.classList.add('hidden');
     document.removeEventListener('keydown', onDocumentBigPictureKeyDownEsc);
+    window.comment.showLoaderBtn();
     window.bigPicture.active = false;
   };
 
@@ -32,8 +33,6 @@
       bigPictureElement.classList.remove('hidden');
       fillBigPicture(bigPictureElement, data);
       window.comment.add(data.comments);
-      bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
-      bigPictureElement.querySelector('.comments-loader').classList.add('visually-hidden');
       document.addEventListener('keydown', onDocumentBigPictureKeyDownEsc);
       this.active = true;
     },
