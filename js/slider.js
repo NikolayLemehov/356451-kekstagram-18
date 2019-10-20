@@ -30,12 +30,12 @@
       return 'brightness(' + convertProportion(coefficient, 1, 3);
     },
   };
-  // var effectsList = document.querySelector('.effects__list');
   var effectsRadios = document.querySelectorAll('.effects__list .effects__item .effects__radio');
-
   var imgUploadPreviewElement = document.querySelector('.img-upload__preview');
   var effectLevelLineElement = document.querySelector('.effect-level__line');
   var effectLevelPinElement = effectLevelLineElement.querySelector('.effect-level__pin');
+  var effectLevelDepthElement = effectLevelLineElement.querySelector('.effect-level__depth');
+  var effectLevelValueInput = document.querySelector('.effect-level__value');
 
   var getValuePinAndDepth = function (value) {
     effectLevelPinElement.style.left = value + 'px';
@@ -56,6 +56,7 @@
         window.util.convertPixelToInteger(getComputedStyle(effectLevelLineElement).width);
       var checkedElement = findCheckedElement(effectsRadios);
       imgUploadPreviewElement.style.filter = effectMap[checkedElement.getAttribute('value')](coefficient);
+      effectLevelValueInput.setAttribute('value', String(coefficient * 100));
     };
     var onMouseUp = function () {
       document.removeEventListener('mousemove', onMouseMove);
@@ -65,7 +66,6 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var effectLevelDepthElement = effectLevelLineElement.querySelector('.effect-level__depth');
   var addChangeEffectsRadioHandler = function (element) {
     element.addEventListener('change', function (evt) {
       imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
