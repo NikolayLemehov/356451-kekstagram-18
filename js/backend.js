@@ -16,7 +16,7 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
-    xhr.timeout = 2000;
+    xhr.timeout = 10000;
   };
   window.backend = {
     load: function (onSuccess, onError) {
