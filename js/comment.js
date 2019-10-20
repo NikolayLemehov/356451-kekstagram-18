@@ -3,7 +3,7 @@
 (function () {
   var socialCommentsElement = document.querySelector('.social__comments');
   var renderSocialComments = function (data) {
-    var socialCommentElement = window.bigPicture.element.querySelector('.social__comment').cloneNode(true);
+    var socialCommentElement = socialCommentsElement.querySelector('.social__comment').cloneNode(true);
     socialCommentElement.querySelector('.social__picture').src = data.avatar;
     socialCommentElement.querySelector('.social__picture').alt = data.name;
     socialCommentElement.querySelector('.social__text').textContent = data.message;

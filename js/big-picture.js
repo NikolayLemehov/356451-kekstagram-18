@@ -27,7 +27,6 @@
   };
 
   window.bigPicture = {
-    element: bigPictureElement,
     active: false,
     activate: function (data) {
       bigPictureElement.classList.remove('hidden');
