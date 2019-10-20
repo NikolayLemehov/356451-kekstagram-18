@@ -3,6 +3,7 @@
 (function () {
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var picturesElement = document.querySelector('.pictures');
+
   var renderPicture = function (data) {
     var pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = data.url;
@@ -10,12 +11,12 @@
     pictureElement.querySelector('.picture__comments').textContent = '' + data.comments.length;
     return pictureElement;
   };
-
   var appendPhotosFragment = function (dataArray) {
     var fragment = document.createDocumentFragment();
     dataArray.forEach(function (it) {
       fragment.appendChild(renderPicture(it));
     });
+    window.util.removeCollection(picturesElement.querySelectorAll('.picture'));
     picturesElement.appendChild(fragment);
   };
   var findAndOpenBigPicture = function (src) {
@@ -35,8 +36,8 @@
   picturesElement.addEventListener('click', onPicturesClick);
 
   window.picture = {
-    addPhoto: appendPhotosFragment,
     picturesElement: picturesElement,
+    render: appendPhotosFragment,
     onPicturesClick: onPicturesClick,
   };
 })();

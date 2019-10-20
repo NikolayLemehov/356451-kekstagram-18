@@ -42,9 +42,14 @@
     },
     findSliceShuffleArray: function (array, sliceNumber) {
       if (sliceNumber < array.length) {
-        return this.shuffle(array).slice(array.length - this.findRandomInteger(1, sliceNumber));
+        return this.shuffle(array.slice()).slice(array.length - this.findRandomInteger(1, sliceNumber));
       }
-      return this.shuffle(array).slice(this.findRandomInteger(0, array.length - 1));
+      return this.shuffle(array.slice()).slice(this.findRandomInteger(0, array.length - 1));
+    },
+    removeCollection: function (collection) {
+      for (var i = 0; i < collection.length; i++) {
+        collection[i].remove();
+      }
     },
   };
 })();

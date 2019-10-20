@@ -37,7 +37,7 @@
   window.success = {
     onLoad: function (data) {
       window.data.photos = data;
-      window.picture.addPhoto(window.data.photos);
+      window.filter.updatePicture();
       window.filter.show();
     },
     onSave: function () {
