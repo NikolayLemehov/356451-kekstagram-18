@@ -42,8 +42,16 @@
     }
   });
 
+  var formReset = function () {
+    formElement.reset();
+    window.slider.getOrigin();
+    window.scaleControl.reset();
+  };
+
   window.upLoadForm = {
-    element: formElement,
-    hide: hideUpLoadForm,
+    hide: function () {
+      formReset();
+      hideUpLoadForm();
+    },
   };
 })();

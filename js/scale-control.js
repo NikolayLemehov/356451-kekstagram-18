@@ -30,4 +30,10 @@
     currentScale = scale;
   };
   scaleControlValueInput.setAttribute('value', currentScale + '%');
+
+  window.scaleControl = {
+    reset: function () {
+      getImgScale(SCALE.START);
+    },
+  };
 })();

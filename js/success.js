@@ -42,8 +42,6 @@
     },
     onSave: function () {
       showSuccess();
-      window.upLoadForm.element.reset();
-      window.slider.getOrigin();
       window.upLoadForm.hide();
     },
   };
