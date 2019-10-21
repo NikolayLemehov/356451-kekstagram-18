@@ -34,9 +34,6 @@
     convertPixelToInteger: function (string) {
       return Number(string.slice(0, -2));
     },
-    findRandomItemArray: function (array) {
-      return array[this.findRandomInteger(0, array.length - 1)];
-    },
     removeCollection: function (collection) {
       for (var i = 0; i < collection.length; i++) {
         collection[i].remove();
