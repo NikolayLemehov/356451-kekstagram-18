@@ -12,7 +12,6 @@
 
   var commentsShowElement = document.querySelector('.social__comment-count .comments-show');
   var commentsLoaderBtn = document.querySelector('.comments-loader');
-  var displayStyleLoaderBtn = getComputedStyle(commentsLoaderBtn).display;
 
   commentsLoaderBtn.addEventListener('click', function () {
     showCommentsInCollection(commentsCollection);
@@ -40,7 +39,7 @@
       }
       showedCommentsNumber = collection.length;
       commentsShowElement.textContent = collection.length;
-      commentsLoaderBtn.style.display = 'none';
+      commentsLoaderBtn.classList.add('hidden');
     }
   };
 
@@ -58,7 +57,7 @@
   window.comment = {
     add: appendSocialComments,
     reset: function () {
-      commentsLoaderBtn.style.display = displayStyleLoaderBtn;
+      commentsLoaderBtn.classList.remove('hidden');
       showedCommentsNumber = SHOWED_COMMENTS.START;
     },
   };
