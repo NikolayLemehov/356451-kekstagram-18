@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var bodyElement = document.querySelector('body');
   var bigPictureElement = document.querySelector('.big-picture');
 
   var fillBigPicture = function (element, dataPhoto) {
@@ -30,7 +29,7 @@
   window.bigPicture = {
     activate: function (data) {
       bigPictureElement.classList.remove('hidden');
-      bodyElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
       fillBigPicture(bigPictureElement, data);
       window.comment.add(data.comments);
       document.addEventListener('keydown', onDocumentBigPictureKeyDownEsc);
