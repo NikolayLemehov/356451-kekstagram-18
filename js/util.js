@@ -3,9 +3,6 @@
 (function () {
   window.util = {
     ESC_KEY_CODE: 27,
-    findRandomInteger: function (min, max) {
-      return Math.floor(min + Math.random() * (max + 1 - min));
-    },
     shuffle: function (array) {
       for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
