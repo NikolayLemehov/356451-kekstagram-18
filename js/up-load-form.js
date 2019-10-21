@@ -53,5 +53,6 @@
       formReset();
       hideUpLoadForm();
     },
+    submit: formSubmitBtn.click.bind(formSubmitBtn),
   };
 })();

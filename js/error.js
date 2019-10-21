@@ -12,14 +12,14 @@
 
   var errorTitleElement = errorElement.querySelector('.error__title');
   var errorTryAgainBtn = errorElement.querySelector('.error__button--try-again');
-  // var errorUploadOtherBtn = errorElement.querySelector('.error__button--upload-other');
-  // errorUploadOtherBtn.setAttribute('disabled', 'disabled');
+  var errorUploadOtherBtn = errorElement.querySelector('.error__button--upload-other');
 
-  var onErrorTryAgainBtnClick = function (evt) {
+  var onErrorUploadOtherBtnClick = function (evt) {
     evt.preventDefault();
     hideErrorElement();
+    window.upLoadForm.hide();
   };
-  errorTryAgainBtn.addEventListener('click', onErrorTryAgainBtnClick);
+  errorUploadOtherBtn.addEventListener('click', onErrorUploadOtherBtnClick);
 
   var onDocumentErrorEscKeyDown = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
@@ -34,7 +34,11 @@
     errorElement.style.display = 'none';
     document.removeEventListener('keydown', onDocumentErrorEscKeyDown);
   };
-  // showError();
+  errorTryAgainBtn.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    hideErrorElement();
+    window.upLoadForm.submit();
+  });
 
   window.error = {
     onError: function (errorMessage) {
