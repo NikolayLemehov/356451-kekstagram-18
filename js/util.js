@@ -15,13 +15,6 @@
       }
       return array;
     },
-    createArraySerialIntegerSrc: function (quantity, srcItems) {
-      var array = [];
-      for (var i = 0; i < quantity; i++) {
-        array.push(srcItems[0] + (i + 1) + srcItems[1]);
-      }
-      return array;
-    },
     convertPixelToInteger: function (string) {
       return Number(string.slice(0, -2));
     },
