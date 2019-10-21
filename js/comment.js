@@ -1,8 +1,11 @@
 'use strict';
 
 (function () {
-  var SHOWED_COMMENTS_STEP = 5;
-  var showedCommentsNumber = 0;
+  var SHOWED_COMMENTS = {
+    START: 0,
+    STEP: 5,
+  };
+  var showedCommentsNumber = SHOWED_COMMENTS.START;
   var commentsCollection;
   var socialCommentsElement = document.querySelector('.social__comments');
   var displayStyleComment = getComputedStyle(socialCommentsElement.querySelector('.social__comment')).display;
@@ -25,17 +28,17 @@
   };
 
   var showCommentsInCollection = function (collection) {
-    if (collection.length > showedCommentsNumber + SHOWED_COMMENTS_STEP) {
-      for (var i = showedCommentsNumber; i < showedCommentsNumber + SHOWED_COMMENTS_STEP; i++) {
+    if (collection.length > showedCommentsNumber + SHOWED_COMMENTS.STEP) {
+      for (var i = showedCommentsNumber; i < showedCommentsNumber + SHOWED_COMMENTS.STEP; i++) {
         collection[i].style.display = displayStyleComment;
       }
-      showedCommentsNumber += SHOWED_COMMENTS_STEP;
+      showedCommentsNumber += SHOWED_COMMENTS.STEP;
       commentsShowElement.textContent = showedCommentsNumber;
     } else {
       for (var j = showedCommentsNumber; j < collection.length; j++) {
         collection[j].style.display = displayStyleComment;
       }
-      showedCommentsNumber = 0;
+      showedCommentsNumber = collection.length;
       commentsShowElement.textContent = collection.length;
       commentsLoaderBtn.style.display = 'none';
     }
@@ -54,8 +57,9 @@
 
   window.comment = {
     add: appendSocialComments,
-    showLoaderBtn: function () {
+    reset: function () {
       commentsLoaderBtn.style.display = displayStyleLoaderBtn;
+      showedCommentsNumber = SHOWED_COMMENTS.START;
     },
   };
 })();
