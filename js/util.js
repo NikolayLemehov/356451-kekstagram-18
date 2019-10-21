@@ -22,15 +22,6 @@
       }
       return array;
     },
-    concatenateItemArray: function (array) {
-      var string = '' + array[0];
-      if (array.length > 1) {
-        for (var i = 1; i < array.length; i++) {
-          string = string + ' ' + array[i];
-        }
-      }
-      return string;
-    },
     convertPixelToInteger: function (string) {
       return Number(string.slice(0, -2));
     },
