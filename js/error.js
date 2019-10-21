@@ -27,7 +27,7 @@
     }
   };
   var showError = function () {
-    errorElement.style.display = 'block';
+    errorElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentErrorEscKeyDown);
   };
   var hideErrorElement = function () {

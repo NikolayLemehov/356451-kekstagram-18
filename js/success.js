@@ -15,7 +15,7 @@
   });
 
   var showSuccess = function () {
-    successElement.style.display = 'block';
+    successElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentSuccessEscKeyDown);
     document.addEventListener('click', onDocumentSuccessClick);
   };
