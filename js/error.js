@@ -26,7 +26,8 @@
       hideErrorElement();
     }
   };
-  var showError = function () {
+  var showError = function (errorMessage) {
+    errorTitleElement.textContent = errorMessage;
     errorElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentErrorEscKeyDown);
     errorTryAgainBtn.focus();
@@ -42,7 +43,6 @@
   });
 
   window.onError = function (errorMessage) {
-    showError();
-    errorTitleElement.textContent = errorMessage;
+    showError(errorMessage);
   };
 })();
