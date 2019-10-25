@@ -28,10 +28,10 @@
 
   window.bigPicture = {
     activate: function (data) {
-      bigPictureElement.classList.remove('hidden');
-      document.body.classList.add('modal-open');
       fillBigPicture(bigPictureElement, data);
       window.comment.add(data.comments);
+      bigPictureElement.classList.remove('hidden');
+      document.body.classList.add('modal-open');
       document.addEventListener('keydown', onDocumentBigPictureKeyDownEsc);
     },
   };
