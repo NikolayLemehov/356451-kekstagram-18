@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  var SHOWED_COMMENTS = {
+  var ShowedComment = {
     START: 0,
     STEP: 5,
   };
-  var showedCommentsNumber = SHOWED_COMMENTS.START;
+  var showedCommentsNumber = ShowedComment.START;
   var commentsCollection;
   var socialCommentsElement = document.querySelector('.social__comments');
   var displayStyleComment = getComputedStyle(socialCommentsElement.querySelector('.social__comment')).display;
@@ -28,11 +28,12 @@
 
   var socialFooterTextInput = document.querySelector('.social__footer-text');
   var showCommentsInCollection = function (collection) {
-    if (collection.length > showedCommentsNumber + SHOWED_COMMENTS.STEP) {
-      for (var i = showedCommentsNumber; i < showedCommentsNumber + SHOWED_COMMENTS.STEP; i++) {
+    var nextShowedComment = showedCommentsNumber + ShowedComment.STEP;
+    if (collection.length > nextShowedComment) {
+      for (var i = showedCommentsNumber; i < nextShowedComment; i++) {
         collection[i].style.display = displayStyleComment;
       }
-      showedCommentsNumber += SHOWED_COMMENTS.STEP;
+      showedCommentsNumber = nextShowedComment;
       commentsShowElement.textContent = showedCommentsNumber;
     } else {
       for (var j = showedCommentsNumber; j < collection.length; j++) {
@@ -60,7 +61,7 @@
     add: appendSocialComments,
     reset: function () {
       commentsLoaderBtn.classList.remove('hidden');
-      showedCommentsNumber = SHOWED_COMMENTS.START;
+      showedCommentsNumber = ShowedComment.START;
     },
   };
 })();
