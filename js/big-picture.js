@@ -24,6 +24,9 @@
     bigPictureElement.classList.add('hidden');
     document.removeEventListener('keydown', onDocumentBigPictureKeyDownEsc);
     window.comment.reset();
+    var currentLittlePictureElement = window.picture.section.querySelector('.picture .picture__img[src="' +
+      window.data.currentPhoto.url + '"]').parentNode;
+    currentLittlePictureElement.focus();
   };
 
   var likesCountElement = bigPictureElement.querySelector('.likes-count');
