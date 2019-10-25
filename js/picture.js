@@ -36,7 +36,7 @@
   picturesElement.addEventListener('click', onPicturesClick);
 
   window.picture = {
-    element: picturesElement,
+    section: picturesElement,
     render: appendPhotosFragment,
     onClick: onPicturesClick,
   };
