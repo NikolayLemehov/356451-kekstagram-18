@@ -18,6 +18,7 @@
     successElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentSuccessEscKeyDown);
     document.addEventListener('click', onDocumentSuccessClick);
+    successBtn.focus();
   };
   var hideSuccess = function () {
     successElement.style.display = 'none';
