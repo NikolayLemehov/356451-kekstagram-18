@@ -9,12 +9,12 @@
     imgUploadOverlayElement.classList.add('hidden');
     uploadFileInput.value = null;
     document.removeEventListener('keydown', onDocumentFormUpLoadKeyDownEsc);
-    window.picture.picturesElement.addEventListener('click', window.picture.onPicturesClick);
+    window.picture.picturesElement.addEventListener('click', window.picture.onClick);
   };
   var showUpLoadForm = function () {
     imgUploadOverlayElement.classList.remove('hidden');
     document.addEventListener('keydown', onDocumentFormUpLoadKeyDownEsc);
-    window.picture.picturesElement.removeEventListener('click', window.picture.onPicturesClick);
+    window.picture.picturesElement.removeEventListener('click', window.picture.onClick);
   };
 
   var textDescriptionTextarea = document.querySelector('.text__description');

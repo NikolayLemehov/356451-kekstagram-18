@@ -38,6 +38,6 @@
   window.picture = {
     picturesElement: picturesElement,
     render: appendPhotosFragment,
-    onPicturesClick: onPicturesClick,
+    onClick: onPicturesClick,
   };
 })();
