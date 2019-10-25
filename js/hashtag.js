@@ -35,31 +35,30 @@
     array = array.filter(function (it) {
       return it !== '';
     });
+    var addToErroMessage = function (message) {
+      errorMessage = errorMessage + ' ' + ++counter + '. ' + message;
+    };
     if (array.length > TAG.LIMIT) {
-      errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.limit.message;
+      addToErroMessage(mistakeHashtag.limit.message);
     }
+    var setMistakeHashtag = function (mistakeType) {
+      addToErroMessage(mistakeType.message);
+      mistakeType.boolean = true;
+    };
     array.forEach(function (it, i) {
-      switch (true) {
-        case (it[0] !== '#' && !mistakeHashtag.start.boolean):
-          errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.start.message;
-          mistakeHashtag.start.boolean = true;
-          break;
-        case (it === '#' && !mistakeHashtag.single.boolean):
-          errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.single.message;
-          mistakeHashtag.single.boolean = true;
-          break;
-        case (it.length > 20 && !mistakeHashtag.length.boolean):
-          errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.length.message;
-          mistakeHashtag.length.boolean = true;
-          break;
-        case (!mistakeHashtag.repeat.boolean && !!(array.slice(i + 1)).find(function (item) {
-          return item === it;
-        })):
-          errorMessage = errorMessage + ' ' + ++counter + '. ' + mistakeHashtag.repeat.message;
-          mistakeHashtag.repeat.boolean = true;
-          break;
-        default:
-          return;
+      if (it[0] !== '#' && !mistakeHashtag.start.boolean) {
+        setMistakeHashtag(mistakeHashtag.start);
+      }
+      if (it === '#' && !mistakeHashtag.single.boolean) {
+        setMistakeHashtag(mistakeHashtag.start);
+      }
+      if (it.length > 20 && !mistakeHashtag.length.boolean) {
+        setMistakeHashtag(mistakeHashtag.length);
+      }
+      if (!mistakeHashtag.repeat.boolean && !!(array.slice(i + 1)).find(function (item) {
+        return item === it;
+      })) {
+        setMistakeHashtag(mistakeHashtag.repeat);
       }
     });
     textHashtagsInput.setCustomValidity(errorMessage);
