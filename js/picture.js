@@ -23,7 +23,7 @@
     window.data.currentPhoto = window.data.photos.find(function (it) {
       return it.url === src;
     });
-    window.bigPicture.activate(window.data.currentPhoto);
+    window.activateBigPicture(window.data.currentPhoto);
   };
   var onPicturesClick = function (evt) {
     var picture = evt.path.find(function (it) {

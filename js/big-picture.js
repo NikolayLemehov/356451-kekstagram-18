@@ -31,14 +31,12 @@
 
   var likesCountElement = bigPictureElement.querySelector('.likes-count');
 
-  window.bigPicture = {
-    activate: function (data) {
-      fillBigPicture(bigPictureElement, data);
-      window.comment.add(data.comments);
-      bigPictureElement.classList.remove('hidden');
-      document.body.classList.add('modal-open');
-      likesCountElement.focus();
-      document.addEventListener('keydown', onDocumentBigPictureKeyDownEsc);
-    },
+  window.activateBigPicture = function (data) {
+    fillBigPicture(bigPictureElement, data);
+    window.comment.add(data.comments);
+    bigPictureElement.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    likesCountElement.focus();
+    document.addEventListener('keydown', onDocumentBigPictureKeyDownEsc);
   };
 })();
