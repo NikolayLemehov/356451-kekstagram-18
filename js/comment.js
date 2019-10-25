@@ -26,6 +26,7 @@
     return socialCommentElement;
   };
 
+  var socialFooterTextInput = document.querySelector('.social__footer-text');
   var showCommentsInCollection = function (collection) {
     if (collection.length > showedCommentsNumber + SHOWED_COMMENTS.STEP) {
       for (var i = showedCommentsNumber; i < showedCommentsNumber + SHOWED_COMMENTS.STEP; i++) {
@@ -40,6 +41,7 @@
       showedCommentsNumber = collection.length;
       commentsShowElement.textContent = collection.length;
       commentsLoaderBtn.classList.add('hidden');
+      socialFooterTextInput.focus();
     }
   };
 
