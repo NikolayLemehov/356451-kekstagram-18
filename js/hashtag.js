@@ -84,7 +84,5 @@
     }
   });
 
-  window.hashtag = {
-    textInput: textHashtagsInput,
-  };
+  window.textHashtagsInput = textHashtagsInput;
 })();
