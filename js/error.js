@@ -5,8 +5,8 @@
   var addError = function () {
     var element = errorTemplate.cloneNode(true);
     element.style.display = 'none';
-    window.element.main.appendChild(element);
-    return window.element.main.querySelector('.error');
+    window.mainElement.appendChild(element);
+    return window.mainElement.querySelector('.error');
   };
   var errorElement = addError();
 
@@ -41,10 +41,8 @@
     window.upLoadForm.submit();
   });
 
-  window.error = {
-    onError: function (errorMessage) {
-      showError();
-      errorTitleElement.textContent = errorMessage;
-    },
+  window.onError = function (errorMessage) {
+    showError();
+    errorTitleElement.textContent = errorMessage;
   };
 })();

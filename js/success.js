@@ -5,8 +5,8 @@
   var addSuccess = function () {
     var element = successTemplate.cloneNode(true);
     element.style.display = 'none';
-    window.element.main.appendChild(element);
-    return window.element.main.querySelector('.success');
+    window.mainElement.appendChild(element);
+    return window.mainElement.querySelector('.success');
   };
   var successElement = addSuccess();
   var successBtn = successElement.querySelector('.success__button');

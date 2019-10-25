@@ -1,7 +1,5 @@
 'use strict';
 
 (function () {
-  window.element = {
-    main: document.querySelector('main'),
-  };
+  window.mainElement = document.querySelector('main');
 })();

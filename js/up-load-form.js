@@ -38,7 +38,7 @@
   formSubmitBtn.addEventListener('click', function (evt) {
     if (formElement.checkValidity()) {
       evt.preventDefault();
-      window.backend.save(new FormData(formElement), window.success.onSave, window.error.onError);
+      window.backend.save(new FormData(formElement), window.success.onSave, window.onError);
     }
   });
 
