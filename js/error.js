@@ -29,6 +29,7 @@
   var showError = function () {
     errorElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentErrorEscKeyDown);
+    errorTryAgainBtn.focus();
   };
   var hideErrorElement = function () {
     errorElement.style.display = 'none';
