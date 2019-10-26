@@ -50,7 +50,7 @@
         setMistakeHashtag(mistakeHashtag.start);
       }
       if (it === '#' && !mistakeHashtag.single.boolean) {
-        setMistakeHashtag(mistakeHashtag.start);
+        setMistakeHashtag(mistakeHashtag.single);
       }
       if (it.length > 20 && !mistakeHashtag.length.boolean) {
         setMistakeHashtag(mistakeHashtag.length);
