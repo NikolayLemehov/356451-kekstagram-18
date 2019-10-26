@@ -31,6 +31,9 @@
   var validateHashtags = function () {
     var counter = 0;
     var errorMessage = '';
+    for (var key in mistakeHashtag) {
+      mistakeHashtag[key].boolean = false;
+    }
     var array = textHashtagsInput.value.toLowerCase().split(' ');
     array = array.filter(function (it) {
       return it !== '';
