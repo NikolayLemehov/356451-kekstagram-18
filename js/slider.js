@@ -99,7 +99,5 @@
     addOnEffectsRadioChange(it);
   });
 
-  window.slider = {
-    getOrigin: getOrigin,
-  };
+  window.getOriginSlider = getOrigin;
 })();
