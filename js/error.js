@@ -14,13 +14,16 @@
   var errorTryAgainBtn = errorElement.querySelector('.error__button--try-again');
   var errorBtns = errorElement.querySelectorAll('.error__button');
 
-  var onErrorBtnClick = function (evt) {
-    evt.preventDefault();
+  var onErrorBtnClick = function () {
     hideErrorElement();
-    window.hideUpLoadForm();
   };
   errorBtns.forEach(function (it) {
     it.addEventListener('click', onErrorBtnClick);
+  });
+  errorElement.addEventListener('click', function (evt) {
+    if (evt.target === errorElement) {
+      hideErrorElement();
+    }
   });
 
   var onDocumentErrorEscKeyDown = function (evt) {
@@ -34,7 +37,6 @@
     document.addEventListener('keydown', onDocumentErrorEscKeyDown);
     errorTryAgainBtn.focus();
   };
-  showError();
   var hideErrorElement = function () {
     errorElement.style.display = 'none';
     document.removeEventListener('keydown', onDocumentErrorEscKeyDown);
