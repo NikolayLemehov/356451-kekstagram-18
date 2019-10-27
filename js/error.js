@@ -14,13 +14,13 @@
   var errorTryAgainBtn = errorElement.querySelector('.error__button--try-again');
   var errorBtns = errorElement.querySelectorAll('.error__button');
 
-  var onErrorUploadOtherBtnClick = function (evt) {
+  var onErrorBtnClick = function (evt) {
     evt.preventDefault();
     hideErrorElement();
     window.upLoadForm.hide();
   };
   errorBtns.forEach(function (it) {
-    it.addEventListener('click', onErrorUploadOtherBtnClick);
+    it.addEventListener('click', onErrorBtnClick);
   });
 
   var onDocumentErrorEscKeyDown = function (evt) {
