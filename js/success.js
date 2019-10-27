@@ -13,26 +13,25 @@
   successBtn.addEventListener('click', function () {
     hideSuccess();
   });
+  successElement.addEventListener('click', function (evt) {
+    if (evt.target === successElement) {
+      hideSuccess();
+    }
+  });
 
   var showSuccess = function () {
     successElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentSuccessEscKeyDown);
-    document.addEventListener('click', onDocumentSuccessClick);
     successBtn.focus();
   };
   var hideSuccess = function () {
     successElement.style.display = 'none';
     document.removeEventListener('keydown', onDocumentSuccessEscKeyDown);
-    document.removeEventListener('click', onDocumentSuccessClick);
   };
   var onDocumentSuccessEscKeyDown = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
       hideSuccess();
     }
-  };
-  var onDocumentSuccessClick = function (evt) {
-    evt.preventDefault();
-    hideSuccess();
   };
 
   window.success = {
