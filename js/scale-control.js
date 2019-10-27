@@ -34,9 +34,7 @@
 
   scaleControlValueInput.setAttribute('value', currentScale + '%');
 
-  window.scaleControl = {
-    reset: function () {
-      getImgScale(Scale.START);
-    },
+  window.resetScaleControl = function () {
+    getImgScale(Scale.START);
   };
 })();
