@@ -7,12 +7,12 @@
   var filterRandomBtn = imgFiltersElement.querySelector('#filter-random');
   var filterDiscussedBtn = imgFiltersElement.querySelector('#filter-discussed');
 
-  var activeFilter = filterPopularBtn.getAttribute('id');
+  var activeFilterId = filterPopularBtn.getAttribute('id');
   var switchFilter = function (btn) {
-    if (btn.getAttribute('id') !== activeFilter) {
+    if (btn.getAttribute('id') !== activeFilterId) {
       btn.classList.add('img-filters__button--active');
-      imgFiltersElement.querySelector('#' + activeFilter).classList.remove('img-filters__button--active');
-      activeFilter = btn.getAttribute('id');
+      imgFiltersElement.querySelector('#' + activeFilterId).classList.remove('img-filters__button--active');
+      activeFilterId = btn.getAttribute('id');
     }
   };
 
@@ -53,7 +53,7 @@
 
   var updatePicture = function () {
     var filtredPicture = window.data.photos.slice();
-    switch (activeFilter) {
+    switch (activeFilterId) {
       case (filterPopularBtn.getAttribute('id')):
         sortByPopular(filtredPicture);
         break;
