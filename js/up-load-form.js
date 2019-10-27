@@ -48,10 +48,8 @@
     window.resetScaleControl();
   };
 
-  window.upLoadForm = {
-    hide: function () {
-      formReset();
-      hideUpLoadForm();
-    },
+  window.hideUpLoadForm = function () {
+    formReset();
+    hideUpLoadForm();
   };
 })();

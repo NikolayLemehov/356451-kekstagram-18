@@ -43,7 +43,7 @@
     },
     onSave: function () {
       showSuccess();
-      window.upLoadForm.hide();
+      window.hideUpLoadForm();
     },
   };
 })();

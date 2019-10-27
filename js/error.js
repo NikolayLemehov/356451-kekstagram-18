@@ -17,7 +17,7 @@
   var onErrorBtnClick = function (evt) {
     evt.preventDefault();
     hideErrorElement();
-    window.upLoadForm.hide();
+    window.hideUpLoadForm();
   };
   errorBtns.forEach(function (it) {
     it.addEventListener('click', onErrorBtnClick);
@@ -34,6 +34,7 @@
     document.addEventListener('keydown', onDocumentErrorEscKeyDown);
     errorTryAgainBtn.focus();
   };
+  showError();
   var hideErrorElement = function () {
     errorElement.style.display = 'none';
     document.removeEventListener('keydown', onDocumentErrorEscKeyDown);
