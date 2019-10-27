@@ -39,7 +39,7 @@
   errorTryAgainBtn.addEventListener('click', function (evt) {
     evt.preventDefault();
     hideErrorElement();
-    window.upLoadForm.submit();
+    window.upLoadForm.hide();
   });
 
   window.onError = function (errorMessage) {
