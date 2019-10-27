@@ -12,6 +12,13 @@
   var scaleControlBiggerBtn = document.querySelector('.scale__control--bigger');
   var scaleControlValueInput = document.querySelector('.scale__control--value');
   var previewImg = document.querySelector('.img-upload__preview img');
+
+  var getImgScale = function (scale) {
+    previewImg.style.transform = 'scale(' + (scale / 100) + ')';
+    scaleControlValueInput.setAttribute('value', scale + '%');
+    currentScale = scale;
+  };
+
   scaleControlSmallerBtn.addEventListener('click', function () {
     var nextScale = currentScale - Scale.STEP;
     if (nextScale >= Scale.MIN) {
@@ -24,11 +31,7 @@
       getImgScale(nextScale);
     }
   });
-  var getImgScale = function (scale) {
-    previewImg.style.transform = 'scale(' + (scale / 100) + ')';
-    scaleControlValueInput.setAttribute('value', scale + '%');
-    currentScale = scale;
-  };
+
   scaleControlValueInput.setAttribute('value', currentScale + '%');
 
   window.scaleControl = {

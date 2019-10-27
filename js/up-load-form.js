@@ -45,7 +45,7 @@
   var formReset = function () {
     formElement.reset();
     window.slider.getOrigin();
-    window.scaleControl.reset();
+    window.resetScaleControl();
   };
 
   window.upLoadForm = {
