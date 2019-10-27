@@ -36,20 +36,23 @@
         mistakeHashtag[key].boolean = false;
       }
     }
+
     var array = textHashtagsInput.value.toLowerCase().split(' ');
     array = array.filter(function (it) {
       return it !== '';
     });
+
     var addToErroMessage = function (message) {
       errorMessage = errorMessage + ' ' + ++counter + '. ' + message;
     };
-    if (array.length > Tag.LIMIT) {
-      addToErroMessage(mistakeHashtag.limit.message);
-    }
     var setMistakeHashtag = function (mistakeType) {
       addToErroMessage(mistakeType.message);
       mistakeType.boolean = true;
     };
+
+    if (array.length > Tag.LIMIT) {
+      addToErroMessage(mistakeHashtag.limit.message);
+    }
     array.forEach(function (it, i) {
       if (it[0] !== '#' && !mistakeHashtag.start.boolean) {
         setMistakeHashtag(mistakeHashtag.start);
@@ -66,6 +69,7 @@
         setMistakeHashtag(mistakeHashtag.repeat);
       }
     });
+
     textHashtagsInput.setCustomValidity(errorMessage);
   };
 
