@@ -3,7 +3,6 @@
 (function () {
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var picturesElement = document.querySelector('.pictures');
-
   var renderPicture = function (data) {
     var element = pictureTemplate.cloneNode(true);
     element.querySelector('.picture__img').src = data.url;
@@ -19,6 +18,7 @@
     window.util.removeCollection(picturesElement.querySelectorAll('.picture'));
     picturesElement.appendChild(fragment);
   };
+
   var findAndOpenBigPicture = function (src) {
     window.data.currentPhoto = window.data.photos.find(function (it) {
       return it.url === src;
