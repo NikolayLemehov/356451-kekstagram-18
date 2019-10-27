@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var TAG = {
+  var Tag = {
     LIMIT: 5,
     LENGTH: 20,
   };
@@ -15,7 +15,7 @@
       boolean: false,
     },
     length: {
-      message: 'Хештег не может быть длиннее ' + TAG.LENGTH + ' символов всключая "#".',
+      message: 'Хештег не может быть длиннее ' + Tag.LENGTH + ' символов всключая "#".',
       boolean: false,
     },
     repeat: {
@@ -23,7 +23,7 @@
       boolean: false,
     },
     limit: {
-      message: 'Хештегов не может быть больше ' + TAG.LIMIT + 'шт.',
+      message: 'Хештегов не может быть больше ' + Tag.LIMIT + 'шт.',
       boolean: false,
     },
   };
@@ -43,7 +43,7 @@
     var addToErroMessage = function (message) {
       errorMessage = errorMessage + ' ' + ++counter + '. ' + message;
     };
-    if (array.length > TAG.LIMIT) {
+    if (array.length > Tag.LIMIT) {
       addToErroMessage(mistakeHashtag.limit.message);
     }
     var setMistakeHashtag = function (mistakeType) {
