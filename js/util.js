@@ -16,9 +16,9 @@
       return Number(string.slice(0, -2));
     },
     removeCollection: function (collection) {
-      for (var i = 0; i < collection.length; i++) {
-        collection[i].remove();
-      }
+      collection.forEach(function (it) {
+        it.remove();
+      });
     },
   };
 })();
