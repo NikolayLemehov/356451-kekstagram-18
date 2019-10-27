@@ -5,11 +5,11 @@
   var picturesElement = document.querySelector('.pictures');
 
   var renderPicture = function (data) {
-    var pictureElement = pictureTemplate.cloneNode(true);
-    pictureElement.querySelector('.picture__img').src = data.url;
-    pictureElement.querySelector('.picture__likes').textContent = '' + data.likes;
-    pictureElement.querySelector('.picture__comments').textContent = '' + data.comments.length;
-    return pictureElement;
+    var element = pictureTemplate.cloneNode(true);
+    element.querySelector('.picture__img').src = data.url;
+    element.querySelector('.picture__likes').textContent = '' + data.likes;
+    element.querySelector('.picture__comments').textContent = '' + data.comments.length;
+    return element;
   };
   var appendPhotosFragment = function (dataArray) {
     var fragment = document.createDocumentFragment();
