@@ -77,7 +77,6 @@
     effectLevelElement.setAttribute('disabled', 'disabled');
     effectLevelValueInput.setAttribute('value', '0');
   };
-  getOrigin();
   var getEffect = function (evt) {
     imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
     getMaxValuePinAndDepth();
@@ -98,6 +97,8 @@
   effectsRadios.forEach(function (it) {
     addOnEffectsRadioChange(it);
   });
+
+  getOrigin();
 
   window.getOriginSlider = getOrigin;
 })();
