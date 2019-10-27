@@ -12,14 +12,16 @@
 
   var errorTitleElement = errorElement.querySelector('.error__title');
   var errorTryAgainBtn = errorElement.querySelector('.error__button--try-again');
-  var errorUploadOtherBtn = errorElement.querySelector('.error__button--upload-other');
+  var errorBtns = errorElement.querySelectorAll('.error__button');
 
   var onErrorUploadOtherBtnClick = function (evt) {
     evt.preventDefault();
     hideErrorElement();
     window.upLoadForm.hide();
   };
-  errorUploadOtherBtn.addEventListener('click', onErrorUploadOtherBtnClick);
+  errorBtns.forEach(function (it) {
+    it.addEventListener('click', onErrorUploadOtherBtnClick);
+  });
 
   var onDocumentErrorEscKeyDown = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
@@ -36,11 +38,6 @@
     errorElement.style.display = 'none';
     document.removeEventListener('keydown', onDocumentErrorEscKeyDown);
   };
-  errorTryAgainBtn.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    hideErrorElement();
-    window.upLoadForm.hide();
-  });
 
   window.onError = function (errorMessage) {
     showError(errorMessage);
