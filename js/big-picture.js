@@ -10,8 +10,8 @@
     element.querySelector('.social__caption').textContent = dataPhoto.description;
   };
 
-  var pictureCancelBtn = document.querySelector('#picture-cancel');
-  pictureCancelBtn.addEventListener('click', function (evt) {
+  var cancelBtnElement = document.querySelector('#picture-cancel');
+  cancelBtnElement.addEventListener('click', function (evt) {
     evt.preventDefault();
     deactivateBigPicture();
   });
