@@ -9,8 +9,8 @@
     return window.mainElement.querySelector('.success');
   };
   var successElement = addSuccess();
-  var successBtn = successElement.querySelector('.success__button');
-  successBtn.addEventListener('click', function () {
+  var btnElement = successElement.querySelector('.success__button');
+  btnElement.addEventListener('click', function () {
     hideSuccess();
   });
   successElement.addEventListener('click', function (evt) {
@@ -22,7 +22,7 @@
   var showSuccess = function () {
     successElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentSuccessEscKeyDown);
-    successBtn.focus();
+    btnElement.focus();
   };
   var hideSuccess = function () {
     successElement.style.display = 'none';
