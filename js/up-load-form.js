@@ -20,7 +20,7 @@
   var textDescriptionTextarea = document.querySelector('.text__description');
   var onDocumentFormUpLoadKeyDownEsc = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE && evt.target !== textDescriptionTextarea
-      && evt.target !== window.textHashtagsInput) {
+      && evt.target !== window.hashtagInputElement) {
       hideUpLoadForm();
     }
   };

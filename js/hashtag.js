@@ -27,7 +27,7 @@
       boolean: false,
     },
   };
-  var textHashtagsInput = document.querySelector('.text__hashtags');
+  var hashtagInputElement = document.querySelector('.text__hashtags');
   var validateHashtags = function () {
     var counter = 0;
     var errorMessage = '';
@@ -37,7 +37,7 @@
       }
     }
 
-    var array = textHashtagsInput.value.toLowerCase().split(' ');
+    var array = hashtagInputElement.value.toLowerCase().split(' ');
     array = array.filter(function (it) {
       return it !== '';
     });
@@ -70,7 +70,7 @@
       }
     });
 
-    textHashtagsInput.setCustomValidity(errorMessage);
+    hashtagInputElement.setCustomValidity(errorMessage);
   };
 
   var toColorInvalid = function (element) {
@@ -80,15 +80,15 @@
     element.style.backgroundColor = 'white';
   };
 
-  textHashtagsInput.addEventListener('invalid', function () {
-    toColorInvalid(textHashtagsInput);
+  hashtagInputElement.addEventListener('invalid', function () {
+    toColorInvalid(hashtagInputElement);
   });
-  textHashtagsInput.addEventListener('change', function () {
+  hashtagInputElement.addEventListener('change', function () {
     validateHashtags();
-    if (textHashtagsInput.checkValidity()) {
-      toColorValid(textHashtagsInput);
+    if (hashtagInputElement.checkValidity()) {
+      toColorValid(hashtagInputElement);
     }
   });
 
-  window.textHashtagsInput = textHashtagsInput;
+  window.hashtagInputElement = hashtagInputElement;
 })();
