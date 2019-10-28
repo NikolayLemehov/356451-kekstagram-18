@@ -8,41 +8,41 @@
   var showedCommentsNumber = ShowedComment.START;
   var commentCollection;
   var socialCommentsElement = document.querySelector('.social__comments');
-  var displayStyleComment = getComputedStyle(socialCommentsElement.querySelector('.social__comment')).display;
+  var commentStyleDisplay = getComputedStyle(socialCommentsElement.querySelector('.social__comment')).display;
 
   var commentsShowElement = document.querySelector('.social__comment-count .comments-show');
-  var commentsLoaderBtn = document.querySelector('.comments-loader');
+  var loaderBtnElement = document.querySelector('.comments-loader');
 
-  commentsLoaderBtn.addEventListener('click', function () {
+  loaderBtnElement.addEventListener('click', function () {
     showCommentsInCollection(commentCollection);
   });
 
   var renderSocialComments = function (data) {
-    var socialCommentElement = socialCommentsElement.querySelector('.social__comment').cloneNode(true);
-    socialCommentElement.querySelector('.social__picture').src = data.avatar;
-    socialCommentElement.querySelector('.social__picture').alt = data.name;
-    socialCommentElement.querySelector('.social__text').textContent = data.message;
-    socialCommentElement.style.display = 'none';
-    return socialCommentElement;
+    var element = socialCommentsElement.querySelector('.social__comment').cloneNode(true);
+    element.querySelector('.social__picture').src = data.avatar;
+    element.querySelector('.social__picture').alt = data.name;
+    element.querySelector('.social__text').textContent = data.message;
+    element.style.display = 'none';
+    return element;
   };
 
-  var socialFooterTextInput = document.querySelector('.social__footer-text');
+  var footerTextInputElement = document.querySelector('.social__footer-text');
   var showCommentsInCollection = function (collection) {
     var nextShowedComment = showedCommentsNumber + ShowedComment.STEP;
     if (collection.length > nextShowedComment) {
       for (var i = showedCommentsNumber; i < nextShowedComment; i++) {
-        collection[i].style.display = displayStyleComment;
+        collection[i].style.display = commentStyleDisplay;
       }
       showedCommentsNumber = nextShowedComment;
       commentsShowElement.textContent = showedCommentsNumber;
     } else {
       for (var j = showedCommentsNumber; j < collection.length; j++) {
-        collection[j].style.display = displayStyleComment;
+        collection[j].style.display = commentStyleDisplay;
       }
       showedCommentsNumber = collection.length;
       commentsShowElement.textContent = collection.length;
-      commentsLoaderBtn.classList.add('hidden');
-      socialFooterTextInput.focus();
+      loaderBtnElement.classList.add('hidden');
+      footerTextInputElement.focus();
     }
   };
 
@@ -60,7 +60,7 @@
   window.comment = {
     add: appendSocialComments,
     reset: function () {
-      commentsLoaderBtn.classList.remove('hidden');
+      loaderBtnElement.classList.remove('hidden');
       showedCommentsNumber = ShowedComment.START;
     },
   };
