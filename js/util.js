@@ -12,9 +12,6 @@
       }
       return array;
     },
-    convertPixelToInteger: function (string) {
-      return Number(string.slice(0, -2));
-    },
     removeCollection: function (collection) {
       collection.forEach(function (it) {
         it.remove();
