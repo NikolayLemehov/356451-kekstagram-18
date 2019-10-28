@@ -2,12 +2,12 @@
 
 (function () {
   var formElement = document.querySelector('#upload-select-image');
-  var uploadFileInput = document.querySelector('#upload-file');
+  var fileInputElement = document.querySelector('#upload-file');
   var imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
 
   var hideUpLoadForm = function () {
     imgUploadOverlayElement.classList.add('hidden');
-    uploadFileInput.value = null;
+    fileInputElement.value = null;
     document.removeEventListener('keydown', onDocumentFormUpLoadKeyDownEsc);
     window.picture.section.addEventListener('click', window.picture.onClick);
   };
@@ -17,25 +17,25 @@
     window.picture.section.removeEventListener('click', window.picture.onClick);
   };
 
-  var textDescriptionTextarea = document.querySelector('.text__description');
+  var descriptionTextareaElement = document.querySelector('.text__description');
   var onDocumentFormUpLoadKeyDownEsc = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEY_CODE && evt.target !== textDescriptionTextarea
+    if (evt.keyCode === window.util.ESC_KEY_CODE && evt.target !== descriptionTextareaElement
       && evt.target !== window.hashtagInputElement) {
       hideUpLoadForm();
     }
   };
 
-  uploadFileInput.addEventListener('change', function () {
+  fileInputElement.addEventListener('change', function () {
     showUpLoadForm();
   });
 
-  var uploadCancelBtn = document.querySelector('#upload-cancel');
-  uploadCancelBtn.addEventListener('click', function () {
+  var cancelBtnElement = document.querySelector('#upload-cancel');
+  cancelBtnElement.addEventListener('click', function () {
     hideUpLoadForm();
   });
 
-  var formSubmitBtn = document.querySelector('.img-upload__submit');
-  formSubmitBtn.addEventListener('click', function (evt) {
+  var submitBtnElement = document.querySelector('.img-upload__submit');
+  submitBtnElement.addEventListener('click', function (evt) {
     if (formElement.checkValidity()) {
       evt.preventDefault();
       window.backend.save(new FormData(formElement), window.success.onSave, window.onError);
