@@ -6,7 +6,7 @@
     STEP: 5,
   };
   var showedCommentsNumber = ShowedComment.START;
-  var commentsCollection;
+  var commentCollection;
   var socialCommentsElement = document.querySelector('.social__comments');
   var displayStyleComment = getComputedStyle(socialCommentsElement.querySelector('.social__comment')).display;
 
@@ -14,7 +14,7 @@
   var commentsLoaderBtn = document.querySelector('.comments-loader');
 
   commentsLoaderBtn.addEventListener('click', function () {
-    showCommentsInCollection(commentsCollection);
+    showCommentsInCollection(commentCollection);
   });
 
   var renderSocialComments = function (data) {
@@ -53,8 +53,8 @@
     });
     socialCommentsElement.innerHTML = '';
     socialCommentsElement.appendChild(fragment);
-    commentsCollection = socialCommentsElement.querySelectorAll('.social__comment');
-    showCommentsInCollection(commentsCollection);
+    commentCollection = socialCommentsElement.querySelectorAll('.social__comment');
+    showCommentsInCollection(commentCollection);
   };
 
   window.comment = {
