@@ -2,11 +2,19 @@
 
 (function () {
   var COEFFICIENT_MAX = 1;
-  var findCheckedElement = function (collection) {
-    return Array.from(collection).find(function (it) {
-      return it.checked === true;
-    });
+  var Percent = {
+    MIN: 0,
+    MAX: 100,
   };
+  var PhobosCoefficient = {
+    MIN: 0,
+    MAX: 3,
+  };
+  var HeatCoefficient = {
+    MIN: 1,
+    MAX: 3,
+  };
+  var NONE_EFFECT = 'none';
   var convertProportion = function (coefficient, from, to) {
     return (to - from) * coefficient + from;
   };
@@ -21,46 +29,40 @@
       return 'sepia(' + coefficient + ')';
     },
     'marvin': function (coefficient) {
-      return 'invert(' + (coefficient * 100) + '%)';
+      return 'invert(' + (coefficient * Percent.MAX) + '%)';
     },
     'phobos': function (coefficient) {
-      return 'blur(' + convertProportion(coefficient, 0, 3) + 'px)';
+      return 'blur(' + convertProportion(coefficient, PhobosCoefficient.MIN, PhobosCoefficient.MAX) + 'px)';
     },
     'heat': function (coefficient) {
-      return 'brightness(' + convertProportion(coefficient, 1, 3);
+      return 'brightness(' + convertProportion(coefficient, HeatCoefficient.MIN, HeatCoefficient.MAX);
     },
   };
-  var effectsRadios = document.querySelectorAll('.effects__list .effects__item .effects__radio');
-  var imgUploadPreviewElement = document.querySelector('.img-upload__preview');
-  var effectLevelLineElement = document.querySelector('.effect-level__line');
-  var effectLevelPinElement = effectLevelLineElement.querySelector('.effect-level__pin');
-  var effectLevelDepthElement = effectLevelLineElement.querySelector('.effect-level__depth');
-  var effectLevelValueInput = document.querySelector('.effect-level__value');
+  var imgElement = document.querySelector('.img-upload__preview');
+  var lineElement = document.querySelector('.effect-level__line');
+  var pinElement = lineElement.querySelector('.effect-level__pin');
+  var depthElement = lineElement.querySelector('.effect-level__depth');
+  var rangeElement = document.querySelector('.effect-level__value');
 
-  var getValuePinAndDepth = function (value) {
-    effectLevelPinElement.style.left = value + 'px';
-    effectLevelDepthElement.style.width = value + 'px';
-  };
   var getMaxValuePinAndDepth = function () {
-    effectLevelPinElement.style.left = '100%';
-    effectLevelDepthElement.style.width = '100%';
+    pinElement.style.left = Percent.MAX + '%';
+    depthElement.style.width = Percent.MAX + '%';
   };
 
-  effectLevelPinElement.addEventListener('mousedown', function (evt) {
-    var startCoordsX = evt.clientX;
+  var checkedElementValue = '';
+  lineElement.addEventListener('mousedown', function (downEvt) {
+    var coefficient = lineElement.getBoundingClientRect().width / rangeElement.max;
+    var getPinPosition = function (evt) {
+      rangeElement.value = (evt.clientX - lineElement.getBoundingClientRect().left) / coefficient;
+      pinElement.style.left = rangeElement.value * coefficient + 'px';
+      depthElement.style.width = rangeElement.value * coefficient + 'px';
+      imgElement.style.filter = effectMap[checkedElementValue](rangeElement.value / Percent.MAX);
+    };
+    getPinPosition(downEvt);
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-      var shift = moveEvt.clientX - startCoordsX;
-      var left = effectLevelPinElement.offsetLeft + shift;
-      if (Math.round(left) >= 0 && Math.round(left) <= effectLevelLineElement.offsetWidth) {
-        getValuePinAndDepth(left);
-        startCoordsX = moveEvt.clientX;
-      }
-      var coefficient = window.util.convertPixelToInteger(getComputedStyle(effectLevelPinElement).left) /
-        window.util.convertPixelToInteger(getComputedStyle(effectLevelLineElement).width);
-      var checkedElement = findCheckedElement(effectsRadios);
-      imgUploadPreviewElement.style.filter = effectMap[checkedElement.getAttribute('value')](coefficient);
-      effectLevelValueInput.setAttribute('value', String(coefficient * 100));
+      getPinPosition(moveEvt);
     };
     var onMouseUp = function () {
       document.removeEventListener('mousemove', onMouseMove);
@@ -70,23 +72,22 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var effectLevelElement = document.querySelector('.effect-level');
+  var fieldsetElement = document.querySelector('.effect-level');
   var getOrigin = function () {
-    imgUploadPreviewElement.style.filter = '';
-    effectLevelElement.style.display = 'none';
-    effectLevelElement.setAttribute('disabled', 'disabled');
-    effectLevelValueInput.setAttribute('value', '0');
+    imgElement.style.filter = '';
+    fieldsetElement.style.display = 'none';
+    rangeElement.value = Percent.MIN;
   };
   var getEffect = function (evt) {
-    imgUploadPreviewElement.style.filter = effectMap[evt.target.getAttribute('value')](COEFFICIENT_MAX);
+    imgElement.style.filter = effectMap[evt.target.value](COEFFICIENT_MAX);
     getMaxValuePinAndDepth();
-    effectLevelElement.removeAttribute('disabled');
-    effectLevelValueInput.setAttribute('value', '100');
-    effectLevelElement.style.display = 'block';
+    rangeElement.value = Percent.MAX;
+    fieldsetElement.style.display = 'block';
   };
   var addOnEffectsRadioChange = function (element) {
     element.addEventListener('change', function (evt) {
-      if (evt.target.getAttribute('value') === 'none') {
+      checkedElementValue = evt.target.value;
+      if (evt.target.value === NONE_EFFECT) {
         getOrigin();
       } else {
         getEffect(evt);
@@ -94,7 +95,8 @@
     });
   };
 
-  effectsRadios.forEach(function (it) {
+  var radioCollection = document.querySelectorAll('.effects__list .effects__item .effects__radio');
+  radioCollection.forEach(function (it) {
     addOnEffectsRadioChange(it);
   });
 
