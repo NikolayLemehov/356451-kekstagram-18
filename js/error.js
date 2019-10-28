@@ -11,13 +11,13 @@
   var errorElement = addError();
 
   var errorTitleElement = errorElement.querySelector('.error__title');
-  var errorTryAgainBtn = errorElement.querySelector('.error__button--try-again');
-  var errorBtns = errorElement.querySelectorAll('.error__button');
+  var errorTryAgainBtnElement = errorElement.querySelector('.error__button--try-again');
+  var errorBtnCollection = errorElement.querySelectorAll('.error__button');
 
   var onErrorBtnClick = function () {
     hideErrorElement();
   };
-  errorBtns.forEach(function (it) {
+  errorBtnCollection.forEach(function (it) {
     it.addEventListener('click', onErrorBtnClick);
   });
   errorElement.addEventListener('click', function (evt) {
@@ -35,7 +35,7 @@
     errorTitleElement.textContent = errorMessage;
     errorElement.style.display = 'flex';
     document.addEventListener('keydown', onDocumentErrorEscKeyDown);
-    errorTryAgainBtn.focus();
+    errorTryAgainBtnElement.focus();
   };
   var hideErrorElement = function () {
     errorElement.style.display = 'none';
