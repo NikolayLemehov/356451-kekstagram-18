@@ -2,12 +2,12 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-  var uploadFileInput = document.querySelector('#upload-file');
+  var uploadFileElement = document.querySelector('input#upload-file');
   var imgUploadPreviewElement = document.querySelector('.img-upload__preview img');
   var effectsPreviewElements = document.querySelectorAll('.effects__list .effects__preview');
 
-  uploadFileInput.addEventListener('change', function () {
-    var file = uploadFileInput.files[0];
+  uploadFileElement.addEventListener('change', function () {
+    var file = uploadFileElement.files[0];
     var fileName = file.name.toLowerCase();
     var typeCoincidence = FILE_TYPES.some(function (it) {
       return fileName.endsWith(it);
