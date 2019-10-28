@@ -8,31 +8,31 @@
     START: 100,
   };
   var currentScale = Scale.START;
-  var scaleControlSmallerBtnElement = document.querySelector('.scale__control--smaller');
-  var scaleControlBiggerBtnElement = document.querySelector('.scale__control--bigger');
-  var scaleControlValueInputElement = document.querySelector('.scale__control--value');
+  var smallerBtnElement = document.querySelector('.scale__control--smaller');
+  var biggerBtnElement = document.querySelector('.scale__control--bigger');
+  var valueInputElement = document.querySelector('.scale__control--value');
   var previewImgElement = document.querySelector('.img-upload__preview img');
 
   var getImgScale = function (scale) {
     previewImgElement.style.transform = 'scale(' + (scale / 100) + ')';
-    scaleControlValueInputElement.setAttribute('value', scale + '%');
+    valueInputElement.setAttribute('value', scale + '%');
     currentScale = scale;
   };
 
-  scaleControlSmallerBtnElement.addEventListener('click', function () {
+  smallerBtnElement.addEventListener('click', function () {
     var nextScale = currentScale - Scale.STEP;
     if (nextScale >= Scale.MIN) {
       getImgScale(nextScale);
     }
   });
-  scaleControlBiggerBtnElement.addEventListener('click', function () {
+  biggerBtnElement.addEventListener('click', function () {
     var nextScale = currentScale + Scale.STEP;
     if (currentScale + Scale.STEP <= Scale.MAX) {
       getImgScale(nextScale);
     }
   });
 
-  scaleControlValueInputElement.setAttribute('value', currentScale + '%');
+  valueInputElement.setAttribute('value', currentScale + '%');
 
   window.resetScaleControl = function () {
     getImgScale(Scale.START);
