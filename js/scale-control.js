@@ -14,7 +14,7 @@
   var previewImgElement = document.querySelector('.img-upload__preview img');
 
   var getImgScale = function (scale) {
-    previewImgElement.style.transform = 'scale(' + (scale / 100) + ')';
+    previewImgElement.style.transform = 'scale(' + (scale / Scale.MAX) + ')';
     valueInputElement.setAttribute('value', scale + '%');
     currentScale = scale;
   };
