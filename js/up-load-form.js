@@ -7,12 +7,14 @@
 
   var hideUpLoadForm = function () {
     imgUploadOverlayElement.classList.add('hidden');
+    document.body.classList.remove('modal-open');
     fileInputElement.value = null;
     document.removeEventListener('keydown', onDocumentFormUpLoadKeyDownEsc);
     window.picture.section.addEventListener('click', window.picture.onClick);
   };
   var showUpLoadForm = function () {
     imgUploadOverlayElement.classList.remove('hidden');
+    document.body.classList.add('modal-open');
     document.addEventListener('keydown', onDocumentFormUpLoadKeyDownEsc);
     window.picture.section.removeEventListener('click', window.picture.onClick);
   };
