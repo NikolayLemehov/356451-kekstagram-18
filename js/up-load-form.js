@@ -5,12 +5,19 @@
   var fileInputElement = document.querySelector('#upload-file');
   var imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
 
+  var formReset = function () {
+    formElement.reset();
+    window.getOriginSlider();
+    window.resetScaleControl();
+  };
+
   var hideUpLoadForm = function () {
     imgUploadOverlayElement.classList.add('hidden');
     document.body.classList.remove('modal-open');
     fileInputElement.value = null;
     document.removeEventListener('keydown', onDocumentFormUpLoadKeyDownEsc);
     window.picture.section.addEventListener('click', window.picture.onClick);
+    formReset();
   };
   var showUpLoadForm = function () {
     imgUploadOverlayElement.classList.remove('hidden');
@@ -44,14 +51,5 @@
     }
   });
 
-  var formReset = function () {
-    formElement.reset();
-    window.getOriginSlider();
-    window.resetScaleControl();
-  };
-
-  window.hideUpLoadForm = function () {
-    formReset();
-    hideUpLoadForm();
-  };
+  window.hideUpLoadForm = hideUpLoadForm;
 })();
