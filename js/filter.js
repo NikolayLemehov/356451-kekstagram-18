@@ -30,15 +30,6 @@
     debounceUpdatePicture();
   });
 
-  var sortByPopular = function (photos) {
-    photos.sort(function (left, right) {
-      var rankDiff = right.likes - left.likes;
-      if (rankDiff === 0) {
-        rankDiff = right.comments.length - left.comments.length;
-      }
-      return rankDiff;
-    });
-  };
   var sortByRandom = function (photos) {
     return window.util.shuffle(photos).slice(-RANDOM_PHOTO_NUMBER);
   };
@@ -56,7 +47,6 @@
     var filtredPicture = window.data.photos.slice();
     switch (activeFilterId) {
       case (filterPopularBtnElement.getAttribute('id')):
-        sortByPopular(filtredPicture);
         break;
       case (filterRandomBtnElement.getAttribute('id')):
         filtredPicture = sortByRandom(filtredPicture);
