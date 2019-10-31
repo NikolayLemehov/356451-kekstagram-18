@@ -46,8 +46,6 @@
   var updatePicture = function () {
     var filtredPicture = window.data.photos.slice();
     switch (activeFilterId) {
-      case (filterPopularBtnElement.getAttribute('id')):
-        break;
       case (filterRandomBtnElement.getAttribute('id')):
         filtredPicture = sortByRandom(filtredPicture);
         break;
